@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+
+import { FcGoogle } from "react-icons/fc";
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -27,6 +31,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
@@ -44,6 +52,8 @@ const SignUp = (props) => {
     email: '',
     password: '',
     avatar: '',
+    barrio: '',
+    direccion:'',
   });
 
   const [alertMessage, setAlertMessage] = useState(null);
@@ -57,9 +67,9 @@ const SignUp = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setAlertMessage(null);
-
+  
+    //Create user with enamil and password
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then(response => {
       // guardar los datos del usuario
@@ -68,9 +78,9 @@ const SignUp = (props) => {
       //alert('Bienvenido a Chat App');
       setAlertMessage({
         type: 'success',
-        message: 'Bienvenido a Chat App'
+        message: 'Bienvenido a BeautyServices'
       });
-      props.history.push('/');
+      props.history.push('/inicioPerfil');
     })
     .catch(error => {
       console.log(error);
@@ -86,10 +96,13 @@ const SignUp = (props) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+      <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
         <Typography component="h1" variant="h5">
-          Registrarme en Chat App
+          Registrarme en BeautyServices
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit}> 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -99,7 +112,7 @@ const SignUp = (props) => {
                 required
                 fullWidth
                 id="name"
-                label="Nombre"
+                label="Nombre Completo"
                 autoFocus
                 value={user.name}
                 onChange={handleChange}
@@ -108,10 +121,9 @@ const SignUp = (props) => {
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
                 id="avatar"
-                label="URL avatar"
+                label="URL avatar (opcional)"
                 name="avatar"
                 value={user.avatar}
                 onChange={handleChange}
@@ -123,7 +135,8 @@ const SignUp = (props) => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo"
+                type="email"
                 name="email"
                 autoComplete="email"
                 value={user.email}
@@ -136,11 +149,41 @@ const SignUp = (props) => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
                 value={user.password}
+                onChange={handleChange}
+              />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+                autoComplete="fname"
+                name="barrio"
+                variant="outlined"
+                required
+                fullWidth
+                type="barrio"
+                id="barrio"
+                label="Barrio (Prado)"
+                autoFocus
+                value={user.barrio}
+                onChange={handleChange}
+              />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+                autoComplete="fname"
+                name="direccion"
+                variant="outlined"
+                required
+                fullWidth
+                type="direction"
+                id="direccion"
+                label="Direccion"
+                autoFocus
+                value={user.direccion}
                 onChange={handleChange}
               />
             </Grid>

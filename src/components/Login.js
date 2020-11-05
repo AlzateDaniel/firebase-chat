@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+
+import { FcGoogle } from "react-icons/fc";
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -49,6 +53,8 @@ const Login = (props) => {
   });
 
   const [errorMessage, setErrorMessage] = useState('');
+  
+  const [alertMessage, setAlertMessage] = useState(null);
 
   const handleChange = (e) => {
     setUser({
@@ -61,9 +67,11 @@ const Login = (props) => {
     e.preventDefault();
     setErrorMessage('');
 
+
+    //Login with email and password
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
     .then(response => {
-      props.history.push('/');
+      props.history.push('/inicioPerfil');
     })
     .catch(error => {
       console.log(error);
@@ -72,13 +80,15 @@ const Login = (props) => {
     });
   };
 
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+      <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
         <Typography component="h1" variant="h5">
-          Ingresar a Chat App
+          Ingresar a BeautyServices
         </Typography>
         <form className={classes.form} onSubmit={handleLogin}>
           <TextField
@@ -87,7 +97,7 @@ const Login = (props) => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Correo"
             name="email"
             autoComplete="email"
             autoFocus
@@ -100,7 +110,7 @@ const Login = (props) => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -119,7 +129,7 @@ const Login = (props) => {
           <Grid container>
             <Grid item>
               <Link to="/signup" component={MyLink} variant="body2">
-                {"No tengo una cuenta"}
+                {"¿No tienes una cuenta? Ingresa aqui"}
               </Link>
             </Grid>
           </Grid>
@@ -127,6 +137,13 @@ const Login = (props) => {
       </div>
       {errorMessage &&
         <Alert type="error" message={errorMessage} autoclose={5000} />
+      }
+       {alertMessage && 
+        <Alert
+          type={alertMessage.type}
+          message={alertMessage.message}
+          autoclose={5000}
+        />
       }
     </Container>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -59,6 +60,8 @@ const Profile = (props) => {
     name: '',
     email: '',
     avatar: '',
+    barrio: '',
+    direccion: '',
   });
 
   const [image, setImage] = useState(null);
@@ -150,7 +153,7 @@ const Profile = (props) => {
                 required
                 fullWidth
                 id="name"
-                label="Nombre"
+                label="Cambiar nombre"
                 autoFocus
                 value={user.name}
                 onChange={handleChange}
@@ -162,10 +165,40 @@ const Profile = (props) => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Cambiar correo"
                 name="email"
                 autoComplete="email"
                 value={user.email}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="fname"
+                name="barrio"
+                variant="outlined"
+                required
+                fullWidth
+                type="barrio"
+                id="barrio"
+                label="Barrio (Prado)"
+                autoFocus
+                value={user.barrio}
+                onChange={handleChange}
+              />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+                autoComplete="fname"
+                name="direccion"
+                variant="outlined"
+                required
+                fullWidth
+                type="direction"
+                id="direccion"
+                label="Direccion"
+                autoFocus
+                value={user.direccion}
                 onChange={handleChange}
               />
             </Grid>
@@ -199,8 +232,8 @@ const Profile = (props) => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/" component={MyLink} variant="body2">
-                {"Ir al Chat"}
+              <Link to="/inicioPerfil" component={MyLink} variant="body2">
+                {"Ir al Inicio"}
               </Link>
             </Grid>
           </Grid>

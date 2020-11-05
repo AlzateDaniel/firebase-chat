@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -14,6 +15,8 @@ import 'firebase/auth';
 import NewMessage from './NewMessage';
 import CustomAvatar from '../CustomAvatar';
 import { loadUser } from '../../utils/dbUtils';
+
+import Header from '../layout/Header';
 
 const useStyles = makeStyles(theme => ({
   text: {

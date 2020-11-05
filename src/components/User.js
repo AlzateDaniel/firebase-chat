@@ -1,4 +1,5 @@
 import React from 'react';
+
 import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
@@ -58,13 +59,11 @@ const User = ({ history, user, onLogout }) => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem disabled>{user.name}</MenuItem>
+        <MenuItem disabled >{user.name}</MenuItem>
         <MenuItem>
-          <Link to="/profile" component={MyLink} variant="body2" onClick={handleClose}>
-            {"Mi Perfil"}
-          </Link>
+          <Link to="/profile" component={MyLink} variant="body2" onClick={handleClose}>Mi Perfil</Link>
         </MenuItem>
-        <MenuItem onClick={handleLogout}>Salir</MenuItem>
+        <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
       </Menu>
     </div>
   );
